@@ -55,8 +55,8 @@ function parseRSSItems(xml: string, sourceName: string): NewsItem[] {
       item.match(/href="(.*?)"/)?.[1] ?? '#';
     const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] ??
       item.match(/<published>(.*?)<\/published>/)?.[1] ?? new Date().toISOString();
-    const description = item.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/s)?.[1] ??
-      item.match(/<description>(.*?)<\/description>/s)?.[1] ?? '';
+    const description = item.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/)?.[1] ??
+      item.match(/<description>(.*?)<\/description>/)?.[1] ?? '';
 
     const cleanTitle = title.replace(/<[^>]+>/g, '').trim();
     if (!cleanTitle || !isAIRelated(cleanTitle, description)) continue;
