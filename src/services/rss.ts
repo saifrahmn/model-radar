@@ -45,7 +45,7 @@ function timeAgo(dateStr: string): string {
 // Simple XML parser — no external dependency needed for basic RSS
 function parseRSSItems(xml: string, sourceName: string): NewsItem[] {
   const items: NewsItem[] = [];
-  const itemMatches = xml.matchAll(/<item>([\s\S]*?)<\/item>/g);
+  const itemMatches = Array.from(xml.matchAll(/<item>([\s\S]*?)<\/item>/g));
 
   for (const match of itemMatches) {
     const item = match[1];
@@ -83,7 +83,7 @@ export async function fetchAllNews(): Promise<NewsItem[]> {
     RSS_FEEDS.map(async (feed) => {
       const res = await fetch(feed.url, {
         next: { revalidate: 1800 }, // 30 minutes
-        headers: { 'User-Agent': 'Model Radar/1.0 RSS Reader' },
+        headers: { 'User-Agent': 'AI Monitor/1.0 RSS Reader' },
       });
       if (!res.ok) throw new Error(`RSS fetch failed: ${feed.name}`);
       const xml = await res.text();
