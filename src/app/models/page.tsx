@@ -24,8 +24,8 @@ export default function ModelsPage() {
     );
   });
 
-  const companies = ['all', ...new Set(models.map((m) => m.company))];
-  const types = ['all', ...new Set(models.map((m) => m.model_type))];
+  const companies = ['all', ...Array.from(new Set(models.map((m) => m.company)))];
+  const types = ['all', ...Array.from(new Set(models.map((m) => m.model_type)))];
 
   return (
     <div style={{ padding: '32px 0' }}>
